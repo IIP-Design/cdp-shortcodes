@@ -1,4 +1,5 @@
-// TODO - Need to consider if we want to use the previous Corona version as a whole or modify it.
+// TODO - Need to consider if we want to use the previous Corona version as a whole or modify it. 
+// This file needs to be broken out into the individual parts. Temporarily in one file for testing purposes.
 
 (function ($) { 
     
