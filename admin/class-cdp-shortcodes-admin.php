@@ -20,6 +20,7 @@ class CDP_Shortcodes_Admin {
 
     public function define_cdp_shortcodes() {
         $this->shortcodesArray = array('Course', 'Article_Feed');
+        //Todo: This URL should be stored elsewhere.
         $this->modulesSrc = 'http://iip-design-stage-modules.s3-website-us-east-1.amazonaws.com/modules/';
     }
 
@@ -31,6 +32,7 @@ class CDP_Shortcodes_Admin {
     }
     
     public function load_cdp_styles_scripts() {
+        //Todo: This should be moved outside admin.
         global $post;
         foreach($this->shortcodesArray as $shortcode) {
             $shortcode = 'cdp-' . strtolower(str_replace( '_', '-', $shortcode));
