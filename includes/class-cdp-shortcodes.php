@@ -30,6 +30,7 @@ class CDP_Shortcodes {
         // load actions
         $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
         $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
+        $this->loader->add_action( 'wp_enqueue_scripts', $admin, 'load_cdp_styles_scripts');
         $this->loader->add_action( 'admin_footer', $admin, 'cdp_shortcodes_get_shortcodes' );
 
         // load filters

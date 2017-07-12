@@ -20,6 +20,7 @@ class CDP_Shortcodes_Admin {
 
     public function define_cdp_shortcodes() {
         $this->shortcodesArray = array('Course', 'Article_Feed');
+        $this->modulesSrc = 'http://iip-design-stage-modules.s3-website-us-east-1.amazonaws.com/modules/';
     }
 
     public function load_cdp_shortcodes() {
@@ -29,6 +30,20 @@ class CDP_Shortcodes_Admin {
         }
     }
     
+    public function load_cdp_styles_scripts() {
+        global $post;
+        foreach($this->shortcodesArray as $shortcode) {
+            $shortcode = 'cdp-' . strtolower(str_replace( '_', '-', $shortcode));
+            $src = $this->modulesSrc . $shortcode;
+            wp_register_style($shortcode, $src . '.min.css');
+            wp_register_script($shortcode, $src . '.min.js');
+            if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode) ) {
+                wp_enqueue_script($shortcode);
+                wp_enqueue_style($shortcode);
+            }
+        } 
+    }
+
     public function cdp_shortcodes_get_shortcodes () {
         if( !empty($this->shortcodesArray) ) {
             
