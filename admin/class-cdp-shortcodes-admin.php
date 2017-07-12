@@ -56,7 +56,7 @@ class CDP_Shortcodes_Admin {
     }
 
     function cdp_shortcodes_add_buttons( $plugin_array ) {
-        $plugin_array['cdp_shortcodes'] = plugin_dir_url( __FILE__ )  . 'js/cdp-shortcodes-admin.js';
+        $plugin_array['cdp_shortcodes'] = plugin_dir_url( __FILE__ )  . 'js/src/tinymce/tinymce.plugins.min.js';
         return $plugin_array;
     }
     function cdp_shortcodes_register_buttons( $buttons ) {
