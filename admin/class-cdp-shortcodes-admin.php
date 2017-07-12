@@ -6,7 +6,6 @@ class CDP_Shortcodes_Admin {
  
     public function __construct( $version ) {
         $this->version = $version;
-        $this->load_dependencies();
         $this->define_cdp_shortcodes();
         $this->load_cdp_shortcodes();
     }
@@ -19,26 +18,14 @@ class CDP_Shortcodes_Admin {
         //wp_enqueue_script('cdp-shortcodes-admin', plugin_dir_url(__FILE__) . 'js/cdp-shortcodes-admin.js');
     }
 
-    public function load_dependencies() {
-        spl_autoload_register( array( $this, 'cdp_shortcodes_autoloader' ) );
-    }
-
     public function define_cdp_shortcodes() {
         $this->shortcodesArray = array('Course', 'Article_Feed');
     }
 
     public function load_cdp_shortcodes() {
         foreach($this->shortcodesArray as $shortcode) {
-            $class = 'CDP_Shortcodes_' . $shortcode;
-            $this->shortcodes[$class] = new $class();
-        }
-    }
-
-    public function cdp_shortcodes_autoloader( $class_name ) {
-        if ( false !== strpos( $class_name, 'CDP_Shortcodes' ) ) {
-            $classes_dir = plugin_dir_path( __FILE__ ) . DIRECTORY_SEPARATOR . 'shortcodes' . DIRECTORY_SEPARATOR;
-            $class_file = 'class-' . strtolower(str_replace( '_', '-', $class_name )) . '.php';
-            require_once $classes_dir . $class_file;
+            $shortcode = 'cdp-' . strtolower(str_replace( '_', '-', $shortcode));
+            add_shortcode($shortcode, array($this, 'cdp_shortcodes_output'));
         }
     }
     
@@ -56,11 +43,31 @@ class CDP_Shortcodes_Admin {
         }
     }
 
-    function cdp_shortcodes_add_buttons( $plugin_array ) {
+    public function cdp_shortcodes_output($atts, $content = "", $shortcode) {
+
+        $uuid = sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+            mt_rand( 0, 0xffff ),
+            mt_rand( 0, 0x0fff ) | 0x4000,
+            mt_rand( 0, 0x3fff ) | 0x8000,
+            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+        );
+
+        $shortcode = "<div id='$uuid' rel='$shortcode' ";
+        foreach($atts as $key => $val){
+            $shortcode .= "data-$key=$val ";
+        }
+        $shortcode .= "></div>";
+
+        return $shortcode;
+    }
+
+    public function cdp_shortcodes_add_buttons( $plugin_array ) {
         $plugin_array['cdp_shortcodes'] = plugin_dir_url( __FILE__ )  . 'js/src/tinymce/cdp.tinymce.plugins.min.js';
         return $plugin_array;
     }
-    function cdp_shortcodes_register_buttons( $buttons ) {
+    
+    public function cdp_shortcodes_register_buttons( $buttons ) {
         array_push($buttons, 'cdp_shortcode');
         return $buttons;
     } 
