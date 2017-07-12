@@ -1,6 +1,6 @@
 // Base plugin prototype
 
-var form_base = { 
+var form_cdp_base = { 
     width: 500,
     height: 220,
     editor: null,
@@ -17,7 +17,7 @@ var form_base = {
     },
 
     addShortcodeToEditor: function ( data ) {
-        var sc = this.shortcodeName.value.replace('_', '-'),
+        var sc = this.shortcodeName.value.replace(/_/g, '-'),
             content = '[' + sc,
             value;
 

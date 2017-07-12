@@ -24,7 +24,7 @@ class CDP_Shortcodes_Admin {
     }
 
     public function define_cdp_shortcodes() {
-        $this->shortcodesArray = array('Course');
+        $this->shortcodesArray = array('Course', 'Article_Feed');
     }
 
     public function load_cdp_shortcodes() {
@@ -48,7 +48,8 @@ class CDP_Shortcodes_Admin {
             echo '<script type="text/javascript">
             var cdp_menu = new Object();';
             foreach( $this->shortcodesArray as $item )  {
-                $sc = strtolower($item);
+                $sc = 'cdp_' . strtolower($item);
+                $item = str_replace( '_', ' ', $item );
                 echo "cdp_menu['{$sc}'] = '{$item}';";
             }
             echo '</script>';
@@ -56,7 +57,7 @@ class CDP_Shortcodes_Admin {
     }
 
     function cdp_shortcodes_add_buttons( $plugin_array ) {
-        $plugin_array['cdp_shortcodes'] = plugin_dir_url( __FILE__ )  . 'js/src/tinymce/tinymce.plugins.min.js';
+        $plugin_array['cdp_shortcodes'] = plugin_dir_url( __FILE__ )  . 'js/src/tinymce/cdp.tinymce.plugins.min.js';
         return $plugin_array;
     }
     function cdp_shortcodes_register_buttons( $buttons ) {

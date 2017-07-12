@@ -1,11 +1,11 @@
 var $ = tinymce.dom.DomQuery;  // tinymce jQuery implementation
 
-var form_course = Object.create( window[ 'form_base' ] );
+var form_cdp_course = Object.create( window[ 'form_cdp_base' ] );
 
-form_course.height =  200;
-form_course.action = "fetch_data_course";
+form_cdp_course.height =  200;
+form_cdp_course.action = "fetch_data_cdp_course";
 
-form_course.getFields = function ( data ) {
+form_cdp_course.getFields = function ( data ) {
     var self = this;  // need to use bind not tself
 
     var fields = [ 
@@ -29,7 +29,7 @@ form_course.getFields = function ( data ) {
     return fields;
 };
 
-form_course.numbersOnly = function ( obj ) {
+form_cdp_course.numbersOnly = function ( obj ) {
     var el =  obj.getEl();
     $(el).attr( 'type', 'number' ); 
     $(el).attr( 'min', '0' );
