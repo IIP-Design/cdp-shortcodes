@@ -4,7 +4,7 @@
   "description": "Creates a tinymce plugin build",
   "scripts": {
     "uglify": "uglifyjs plugins/shortcode/*.js plugins/shortcode/ext/*.js -o ./cdp.tinymce.plugins.min.js   --source-map ./cdp.tinymce.plugins.min.js.map",
-    "watch": "onchange ./plugins/**/*.js  -v -- npm run uglify"
+    "watch": "onchange ./plugins/shortcode/*.js ./plugins/shortcode/ext/*.js  -v -- npm run uglify"
   },
   "author": "Office of Design, U.S. Department of State",
   "license": "MIT",
