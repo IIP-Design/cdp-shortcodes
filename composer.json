@@ -1,0 +1,23 @@
+{
+    "name": "iip-design/cdp-shortcodes",
+    "type": "wordpress-plugin",
+    "description" : "CDP Shortcodes for IIP Properties",
+    "authors": [
+        {
+            "name": "Office of Design, Bureau of International Information Programs",
+            "email": "gustassj@america.gov"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+       "composer/installers": "~1.0",
+        "webdevstudios/cmb2": "^2.2",
+        "jtsternberg/shortcode-button": "^v1.0.7"
+    },
+    "extra": {
+        "installer-paths": {
+            "vendor/webdevstudios/cmb2": ["webdevstudios/cmb2"],
+            "vendor/jtsternberg/Shortcode_Button": ["jtsternberg/shortcode-button"]
+        }
+    }
+}
